@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My recipes</title>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ddd6ca">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{--bg:#ddd6ca;--card:#ece7de;--tx:#4a443c;--tx2:#756e61;--bd:#cfc7b9;--ac:#4a443c;--acbg:#e0d8c9;--dg:#a63a2c;--onac:#f4efe6;--s1:rgba(110,92,64,.25);--s2:rgba(255,255,255,.7);--ttl:#bdae92;--lf:#6f8f3d;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2723;--card:#35312c;--tx:#eee7da;--tx2:#aea697;--bd:#4a453d;--ac:#e4d9c3;--acbg:#433e36;--dg:#f0907f;--onac:#2a2723;--s1:rgba(0,0,0,.45);--s2:rgba(255,255,255,.05);--ttl:#6d6454;--lf:#9bbb62;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2723;--card:#35312c;--tx:#eee7da;--tx2:#aea697;--bd:#4a453d;--ac:#e4d9c3;--acbg:#433e36;--dg:#f0907f;--onac:#2a2723;--s1:rgba(0,0,0,.45);--s2:rgba(255,255,255,.05);--ttl:#6d6454;--lf:#9bbb62;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:0}h2{font-size:20px;margin:0 0 4px}
+.row{display:flex;gap:8px;align-items:center}.sp{justify-content:space-between}
+button,input,select,textarea{font:inherit;color:var(--tx)}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--card)}
+button{border:1px solid var(--bd);background:var(--card);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff}
+button.d{color:var(--dg)}button.g{border:0;background:none;color:var(--tx2);padding:6px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:12px 0;scrollbar-width:thin}
+.chip{white-space:nowrap;border-radius:99px;padding:5px 13px;font-size:14px;color:var(--tx2)}
+.chip.on{background:var(--acbg);color:var(--ac);border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden;cursor:pointer}
+.ph{aspect-ratio:4/3;background:var(--acbg);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+.cb{padding:9px 11px}.cb b{display:block;font-weight:600}.sm{font-size:13px;color:var(--tx2)}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-top:12px}
+label{display:block;font-size:13px;color:var(--tx2);margin:12px 0 4px}
+.ing{display:grid;grid-template-columns:1fr 110px auto;gap:6px;margin-bottom:6px}
+.il{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd)}
+.hero{width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin:10px 0}
+.emp{text-align:center;color:var(--tx2);padding:40px 10px}
+.hide{display:none}
+.pc{display:inline-flex;align-items:center;gap:2px;background:var(--acbg);color:var(--ac);border-radius:99px;padding:3px 4px 3px 12px;margin:0 6px 6px 0;font-size:14px}
+.pc button{border:0;background:none;color:inherit;padding:2px 8px}
+.bar{height:6px;border-radius:99px;background:var(--bd);margin:6px 0;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.mc{padding:12px 14px;margin-bottom:10px}
+body{font-family:Montserrat,system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh}
+.hd{margin:8px 0 4px}
+.scr{font-family:Allura,'Brush Script MT',cursive;font-size:54px;line-height:1;color:var(--tx);margin-bottom:-14px;padding-left:6px;position:relative;z-index:1}
+h1{font-weight:800;font-size:clamp(38px,12vw,60px);letter-spacing:.01em;line-height:1.05;color:var(--ttl);text-shadow:0 2px 0 var(--s2),0 -1px 1px var(--s1),2px 3px 6px var(--s1)}
+h2{font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+h2.dt{font-size:20px;letter-spacing:.06em}
+.tag{display:inline-block;margin-top:14px;padding:9px 20px;border-radius:99px;background:var(--card);box-shadow:4px 4px 10px var(--s1),-4px -4px 10px var(--s2);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+button{border:0;background:var(--card);border-radius:99px;padding:10px 18px;font-weight:500;box-shadow:4px 4px 10px var(--s1),-4px -4px 10px var(--s2)}
+button:active{box-shadow:inset 3px 3px 7px var(--s1),inset -3px -3px 7px var(--s2)}
+button.p{background:var(--ac);color:var(--onac)}
+button.g{background:none;box-shadow:none;padding:6px 8px}
+.chips{padding:12px 6px 18px}
+.chip{padding:7px 16px;font-size:13px;color:var(--tx)}
+.chip.on{background:var(--ac);color:var(--onac);border:0}
+.card,.panel{border:0;border-radius:24px;background:var(--card);box-shadow:6px 6px 16px var(--s1),-5px -5px 14px var(--s2)}
+.card .ph{border-radius:0}
+input,select,textarea{border:1px solid transparent;border-radius:16px;background:var(--bg);box-shadow:inset 3px 3px 6px var(--s1),inset -3px -3px 6px var(--s2)}
+label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:18px 0 6px}
+.bar i{background:var(--lf)}
+.hero{border-radius:20px}
+.il.ig{justify-content:flex-start;gap:14px;align-items:center;border:0;padding:6px 0}
+.dot{width:36px;height:36px;border-radius:50%;flex:none;background:var(--card);box-shadow:3px 3px 7px var(--s1),-3px -3px 7px var(--s2);position:relative}
+.dot::after{content:'';position:absolute;inset:9px;border-radius:50%;background:#cdb98a;box-shadow:inset 1px 1px 3px var(--s1)}
+.st{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+.num{width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:600;background:var(--card);box-shadow:3px 3px 7px var(--s1),-3px -3px 7px var(--s2)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px;padding:14px;border-radius:20px;background:var(--bg);box-shadow:inset 3px 3px 7px var(--s1),inset -3px -3px 7px var(--s2);text-align:center}
+.stats small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2)}
+.stats b{font-size:14px}
+</style></head><body><div class="w" id="app"></div>
+<script>
+var DEF=["Sandwiches","Salads","Soups","Breakfast","Main dishes","Pasta and rice","Meat and poultry","Fish and seafood","Vegetarian","Appetizers","Side dishes","Sauces and dips","Snacks","Bread and dough","Pastries","Desserts","Cakes and cookies","Drinks","Smoothies and juices"];
+var S={recipes:[],cats:DEF.slice(),pantry:[]},ui={v:"list",cat:"All",q:"",id:null,draft:null};
+var DB=null;
+function idb(){return new Promise(function(res,rej){var q=indexedDB.open("recipe-book",1);q.onupgradeneeded=function(){q.result.createObjectStore("kv")};q.onsuccess=function(){res(q.result)};q.onerror=function(){rej(q.error)}})}
+function idbGet(k){return new Promise(function(res,rej){var t=DB.transaction("kv").objectStore("kv").get(k);t.onsuccess=function(){res(t.result)};t.onerror=function(){rej(t.error)}})}
+function idbSet(k,v){return new Promise(function(res,rej){var t=DB.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=res;t.onerror=function(){rej(t.error)};t.onabort=function(){rej(t.error)}})}
+var warn="";
+function save(){if(!DB)return;idbSet("data",S).then(function(){if(warn){warn="";render()}}).catch(function(){warn="Couldn’t save. Your device storage may be full.";render()})}
+function init(){idb().then(function(db){DB=db;return idbGet("data")}).then(function(d){if(d&&d.recipes&&d.cats){S=d;if(!S.pantry)S.pantry=[]}}).catch(function(){warn="Couldn’t open storage. Recipes may not be saved in this browser."}).then(function(){render();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()})}
+function bk(){if(!S.recipes.length||(S.lastBackup&&Date.now()-S.lastBackup<2592e6))return"";return'<div class="panel" style="margin-top:14px;padding:12px 16px"><span class="sm">'+(S.lastBackup?"It’s been a while since your last backup.":"You haven’t backed up your recipes yet.")+'</span> <button class="g" style="text-decoration:underline" onclick="ui.v=\'backup\';render()">Back up now</button></div>'}
+function vBackup(){var lb=S.lastBackup?new Date(S.lastBackup).toLocaleDateString():"Never";
+return'<button class="g" onclick="ui.v=\'list\';render()">← Back to recipes</button><div class="panel" style="margin-top:4px"><h2>Backup and restore</h2><p class="sm">Your recipes live in this app, on this device. A backup file keeps them safe if you change phones or clear your browser data.</p><p class="sm">Last backup: '+lb+'</p><div class="row" style="flex-wrap:wrap"><button class="p" onclick="exportB()">Export backup</button><button onclick="document.getElementById(\'imf\').click()">Import backup</button></div><input type="file" id="imf" accept=".json,application/json" class="hide" onchange="importB(this)"><p class="sm" style="margin-top:14px">Importing adds recipes you don’t already have. It never deletes anything.</p></div>'}
+function exportB(){var blob=new Blob([JSON.stringify({app:"recipe-book",version:1,exported:new Date().toISOString(),data:S})],{type:"application/json"}),name="recipes-backup-"+new Date().toISOString().slice(0,10)+".json",f=new File([blob],name,{type:"application/json"});
+function done(){S.lastBackup=Date.now();save();render()}
+function dl(){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},4000);done()}
+if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:"Recipe backup"}).then(done).catch(function(e){if(e&&e.name!=="AbortError")dl()});else dl()}
+function importB(inp){var f=inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var o=JSON.parse(rd.result),d=o.data||o;if(!d||!Array.isArray(d.recipes)||!Array.isArray(d.cats))throw 0;var have={},add=0;S.recipes.forEach(function(r){have[r.id]=1});
+d.recipes.forEach(function(r){if(r&&r.id&&r.name&&!have[r.id]){r.ings=r.ings||[];S.recipes.push(r);add++}});
+d.cats.forEach(function(c){if(S.cats.indexOf(c)<0)S.cats.push(c)});S.recipes.forEach(function(r){if(S.cats.indexOf(r.cat)<0)S.cats.push(r.cat)});
+save();alert(add+" recipe(s) added");render()}catch(e){alert("That file isn’t a recipe backup")}};rd.readAsText(f);inp.value=""}
+var warn="";
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function vurl(u){u=(u||"").trim();if(!u)return"";if(!/^https?:\/\//i.test(u))u="https://"+u;return u}
+function render(){
+  var a=document.getElementById("app");
+  a.innerHTML=ui.v==="list"?vList():ui.v==="detail"?vDetail():ui.v==="form"?vForm():ui.v==="pantry"?vPantry():ui.v==="backup"?vBackup():vCats();
+  if(warn)a.insertAdjacentHTML("afterbegin",'<p class="panel" style="color:var(--dg)">'+warn+'</p>');
+}
+function vList(){
+  var q=ui.q.toLowerCase(),rs=S.recipes.filter(function(r){
+    if(ui.cat!=="All"&&r.cat!==ui.cat)return false;
+    if(!q)return true;
+    return r.name.toLowerCase().indexOf(q)>-1||r.ings.some(function(i){return i.n.toLowerCase().indexOf(q)>-1})});
+  var h='<div class="hd"><div class="scr">My</div><h1>RECIPES</h1><span class="tag">Cooking, collected</span></div><div class="row" style="flex-wrap:wrap;margin-top:18px"><button class="p" onclick="newR()">Add recipe</button><button onclick="ui.v=\'pantry\';render()">What can I cook?</button><button onclick="ui.v=\'backup\';render()">Backup</button></div>'+bk()+
+  '<div style="margin-top:12px"><input id="q" placeholder="Search by name or ingredient" value="'+esc(ui.q)+'" oninput="ui.q=this.value;list2()"></div>'+
+  '<div class="chips">'+["All"].concat(S.cats).map(function(c){return'<button class="chip'+(c===ui.cat?" on":"")+'" onclick="setCat(this.dataset.c)" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("")+
+  '<button class="chip" onclick="ui.v=\'cats\';render()">Edit categories</button></div><div id="gl">'+cards(rs)+'</div>';
+  return h}
+function cards(rs){
+  if(!rs.length)return'<div class="emp">'+(S.recipes.length?"No recipes match.":"Start your first recipe. Tap Add recipe.")+'</div>';
+  return'<div class="grid">'+rs.map(function(r){return'<div class="card" onclick="openR(\''+r.id+'\')"><div class="ph">'+(r.photo?'<img src="'+r.photo+'" alt="">':"🍽️")+'</div><div class="cb"><b>'+esc(r.name)+'</b><span class="sm">'+esc(r.cat)+" · "+r.ings.length+" ingredients</span></div></div>"}).join("")+"</div>"}
+function list2(){var p=ui.v;render();var i=document.getElementById("q");if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}
+function setCat(c){ui.cat=c;render()}
+function openR(id){ui.id=id;ui.v="detail";render();scrollTo(0,0)}
+function cur(){return S.recipes.filter(function(r){return r.id===ui.id})[0]}
+function vDetail(){
+  var r=cur();if(!r){ui.v="list";return vList()}
+  var u=vurl(r.video);
+  return'<button class="g" onclick="ui.v=\'list\';render()">← Back to recipes</button><div class="panel" style="margin-top:4px"><h2 class="dt">'+esc(r.name)+'</h2>'+
+  (r.photo?'<img class="hero" src="'+r.photo+'" alt="'+esc(r.name)+'">':"")+
+  '<label>Ingredients</label>'+(r.ings.length?r.ings.map(function(i){return'<div class="il ig"><span class="dot"></span><span><b>'+esc(i.a||'\u2013')+'</b><br><span class="sm">'+esc(i.n)+'</span></span></div>'}).join(""):'<p class="sm">No ingredients added.</p>')+
+  (r.steps?'<label>Steps</label>'+stp(r.steps).map(function(s,i){return'<div class="st"><span class="num">'+(i+1)+'</span><span>'+esc(s)+'</span></div>'}).join(''):'')+
+  (u?'<label>Video</label><a href="'+esc(u)+'" target="_blank" rel="noopener" style="color:var(--ac)">Watch the video ↗</a>':"")+
+  '<div class="stats"><div><small>Category</small><b>'+esc(r.cat)+'</b></div><div><small>Ingredients</small><b>'+r.ings.length+'</b></div><div><small>Steps</small><b>'+stp(r.steps).length+'</b></div></div>'+'<div class="row" style="margin-top:20px"><button onclick="editR()">Edit</button><button class="d" onclick="delR()">Delete</button></div></div>'}
+function newR(){ui.draft={id:uid(),name:"",cat:ui.cat!=="All"?ui.cat:S.cats[0],ings:[{n:"",a:""}],steps:"",photo:"",video:"",isNew:true};ui.v="form";render();scrollTo(0,0)}
+function editR(){var r=cur();ui.draft=JSON.parse(JSON.stringify(r));ui.v="form";render();scrollTo(0,0)}
+function delR(){if(!confirm("Delete this recipe?"))return;S.recipes=S.recipes.filter(function(r){return r.id!==ui.id});save();ui.v="list";render()}
+function vForm(){
+  var d=ui.draft;
+  return'<button class="g" onclick="cancelF()">← Cancel</button><div class="panel" style="margin-top:4px"><h2>'+(d.isNew?"New recipe":"Edit recipe")+'</h2>'+
+  '<label>Name</label><input id="fn" value="'+esc(d.name)+'" placeholder="Couscous with lamb">'+
+  '<label>Category</label><select id="fc">'+S.cats.map(function(c){return'<option'+(c===d.cat?" selected":"")+'>'+esc(c)+'</option>'}).join("")+'</select>'+
+  '<label>Photo</label><div id="pv">'+(d.photo?'<img class="hero" src="'+d.photo+'" alt="">':"")+'</div><div class="row"><input type="file" id="ff" accept="image/*" onchange="pickP(this)">'+(d.photo?'<button class="d" onclick="syncD();ui.draft.photo=\'\';render()">Remove</button>':"")+'</div>'+
+  '<label>Ingredients</label><div id="il">'+d.ings.map(function(i,x){return'<div class="ing"><input class="in" placeholder="Ingredient" value="'+esc(i.n)+'"><input class="ia" placeholder="Amount" value="'+esc(i.a)+'"><button class="g" aria-label="Remove" onclick="rmI('+x+')">✕</button></div>'}).join("")+'</div><button onclick="addI()">Add ingredient</button>'+
+  '<label>Steps</label><textarea id="fs" rows="6" placeholder="How to make it">'+esc(d.steps)+'</textarea>'+
+  '<label>Video link</label><input id="fv" type="url" placeholder="https://youtube.com/..." value="'+esc(d.video)+'">'+
+  '<div class="row" style="margin-top:20px"><button class="p" onclick="saveF()">Save recipe</button><button onclick="cancelF()">Cancel</button></div></div>'}
+function syncD(){var d=ui.draft;d.name=document.getElementById("fn").value;d.cat=document.getElementById("fc").value;d.steps=document.getElementById("fs").value;d.video=document.getElementById("fv").value;
+  var n=document.querySelectorAll(".in"),a=document.querySelectorAll(".ia");d.ings=[].map.call(n,function(e,i){return{n:e.value,a:a[i].value}})}
+function addI(){syncD();ui.draft.ings.push({n:"",a:""});render()}
+function rmI(x){syncD();ui.draft.ings.splice(x,1);if(!ui.draft.ings.length)ui.draft.ings.push({n:"",a:""});render()}
+function pickP(inp){
+  var f=inp.files[0];if(!f)return;syncD();
+  var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){
+    var m=720,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");
+    c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+    ui.draft.photo=c.toDataURL("image/jpeg",0.72);render()};im.src=rd.result};rd.readAsDataURL(f)}
+function saveF(){
+  syncD();var d=ui.draft;
+  if(!d.name.trim()){alert("Enter a recipe name");return}
+  d.name=d.name.trim();d.ings=d.ings.filter(function(i){return i.n.trim()});
+  var isNew=d.isNew;delete d.isNew;
+  if(isNew)S.recipes.unshift(d);else S.recipes=S.recipes.map(function(r){return r.id===d.id?d:r});
+  save();ui.id=d.id;ui.v="detail";render();scrollTo(0,0)}
+function cancelF(){ui.v=ui.draft&&!ui.draft.isNew?"detail":"list";render()}
+function vCats(){
+  return'<button class="g" onclick="ui.v=\'list\';render()">← Back to recipes</button><div class="panel" style="margin-top:4px"><h2>Categories</h2>'+
+  '<div class="row" style="margin:10px 0"><input id="nc" placeholder="New category"><button class="p" onclick="addC()">Add</button></div>'+
+  S.cats.map(function(c,i){var n=S.recipes.filter(function(r){return r.cat===c}).length;return'<div class="il"><span>'+esc(c)+' <span class="sm">('+n+')</span></span><span><button class="g" onclick="renC('+i+')">Rename</button><button class="g d" onclick="delC('+i+')">Delete</button></span></div>'}).join("")+'</div>'}
+function addC(){var v=document.getElementById("nc").value.trim();if(!v)return;if(S.cats.indexOf(v)>-1){alert("That category already exists");return}S.cats.push(v);save();render()}
+function renC(i){var o=S.cats[i],v=prompt("Rename category",o);if(!v||!v.trim()||v.trim()===o)return;v=v.trim();if(S.cats.indexOf(v)>-1){alert("That category already exists");return}
+  S.cats[i]=v;S.recipes.forEach(function(r){if(r.cat===o)r.cat=v});if(ui.cat===o)ui.cat=v;save();render()}
+function delC(i){var o=S.cats[i],n=S.recipes.filter(function(r){return r.cat===o}).length;
+  if(S.cats.length<2){alert("Keep at least one category");return}
+  if(!confirm(n?"Delete “"+o+"”? Its "+n+" recipe(s) will move to another category.":"Delete “"+o+"”?"))return;
+  S.cats.splice(i,1);S.recipes.forEach(function(r){if(r.cat===o)r.cat=S.cats[0]});if(ui.cat===o)ui.cat="All";save();render()}
+function stp(s){return(s||'').split(/\n+/).map(function(x){return x.replace(/^\s*\d+[.)]\s*/,'').trim()}).filter(Boolean)}
+function mt(p,n){p=p.toLowerCase().trim();n=n.toLowerCase().trim();if(!p||!n)return false;return p===n||(p.length>2&&n.indexOf(p)>-1)||(n.length>2&&p.indexOf(n)>-1)}
+var pf="";
+function pNames(){var seen={},n=[];S.recipes.forEach(function(r){r.ings.forEach(function(i){var k=i.n.trim().toLowerCase();if(k&&!seen[k]){seen[k]=1;n.push(k)}})});return n.sort()}
+function pChips(){var f=pf.toLowerCase().trim(),n=pNames().filter(function(k){return!f||k.indexOf(f)>-1});
+  if(!n.length)return'<p class="sm">'+(S.recipes.length?'No ingredients match.':'Save some recipes first and their ingredients will show up here.')+'</p>';
+  return n.map(function(k){var on=S.pantry.indexOf(k)>-1;return'<button class="chip'+(on?' on':'')+'" style="margin:0 6px 6px 0" data-k="'+esc(k)+'" onclick="togP(this.dataset.k)">'+(on?'✓ ':'')+esc(k)+'</button>'}).join('')}
+function pRes(){var P=S.pantry;
+  if(!P.length)return'<div class="emp">Select the ingredients you have to see matching recipes.</div>';
+  var res=S.recipes.map(function(r){var m=[],x=[];r.ings.forEach(function(i){(P.some(function(p){return mt(p,i.n)})?m:x).push(i.n)});return{r:r,m:m,x:x}}).filter(function(o){return o.m.length});
+  res.sort(function(a,b){return b.m.length/(b.m.length+b.x.length)-a.m.length/(a.m.length+a.x.length)||b.m.length-a.m.length});
+  if(!res.length)return'<div class="emp">No saved recipe uses these ingredients yet.</div>';
+  function mc(o){var t=o.m.length+o.x.length,pc=Math.round(o.m.length/t*100);return'<div class="card mc" onclick="openR(\''+o.r.id+'\')"><div class="row sp"><b>'+esc(o.r.name)+'</b><span class="sm">'+pc+'%</span></div><div class="bar"><i style="width:'+pc+'%"></i></div><span class="sm">You have '+o.m.length+' of '+t+(o.x.length?' · Missing: '+o.x.map(esc).join(', '):'')+'</span></div>'}
+  var ready=res.filter(function(o){return!o.x.length}),part=res.filter(function(o){return o.x.length}),h='';
+  if(ready.length)h+='<h2 style="margin-top:20px">You can cook now</h2>'+ready.map(mc).join('');
+  if(part.length)h+='<h2 style="margin-top:20px">Almost there</h2>'+part.map(mc).join('');
+  return h}
+function vPantry(){return'<button class="g" onclick="ui.v=\'list\';render()">← Back to recipes</button><div class="panel" style="margin-top:4px"><h2>What can I cook?</h2><p class="sm" style="margin:0 0 10px">Tap the ingredients you have. Matching recipes appear below.</p><input id="pfi" placeholder="Filter ingredients" value="'+esc(pf)+'" oninput="pf=this.value;document.getElementById(\'pc\').innerHTML=pChips()"><div id="pc" style="margin-top:12px">'+pChips()+'</div>'+(S.pantry.length?'<button class="g" onclick="S.pantry=[];save();render()">Clear selection</button>':'')+'</div><div id="pr">'+pRes()+'</div>'}
+function togP(k){var i=S.pantry.indexOf(k);if(i>-1)S.pantry.splice(i,1);else S.pantry.push(k);save();var y=scrollY;render();scrollTo(0,y)}
+init();
+if("serviceWorker" in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+</script></body></html>
